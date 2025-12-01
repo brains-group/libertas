@@ -1,0 +1,25 @@
+@prefix : <urn:solid:mpc#>
+@prefix schema: <https://schema.org/>
+
+# Example Preference Document for Libertas
+# This document expresses a Data Provider's trust in Encryption and Computation Agents
+# 
+# Instructions:
+# 1. Replace the example URLs with your actual agent service URLs
+# 2. Update the userId values for Encryption Agents if needed
+# 3. Upload this file to your Solid Pod
+# 4. Grant read permission to Computation Requestor for this document
+
+[]
+    :trustedComputationServer
+        [ schema:url "http://localhost:8010" ],
+        [ schema:url "http://localhost:8011" ],
+        [ schema:url "http://localhost:8012" ];
+    :trustedEncryptionServer
+        [ schema:url "http://localhost:8000";
+          :userId "https://web.id/alice#me" ],
+        [ schema:url "http://localhost:8001";
+          :userId "can-also-be-some-special-id-for-this-encryption-agent-service" ].
+
+
+

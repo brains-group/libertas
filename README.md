@@ -18,6 +18,24 @@ Preprint available at https://arxiv.org/abs/2309.16365
 
 Please refer to the README in each repository for further details.
 
+## Quick Setup
+
+```bash
+# 1. Clone and setup
+./setup.sh
+./scripts/setup-services.sh
+
+# 2. Configure credentials
+./scripts/configure-credentials.sh
+
+# 3. Start services
+./scripts/start-services.sh
+
+# 4. Access MPC App at http://localhost:5173
+```
+
+See [SETUP.md](./SETUP.md) for complete setup and run instructions.
+
 
 ## Citing this work
 

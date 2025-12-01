@@ -1,0 +1,26 @@
+@prefix : <urn:solid:mpc#>.
+
+# Example Resource Description Document for Libertas MPC App
+# This document describes the collection of Data Providers and their resources
+#
+# Instructions:
+# 1. Replace the example URIs with your actual data provider information
+# 2. Add more :source entries for additional data providers
+# 3. Each :MPCSource must have:
+#    - :pref: URL to the Preference Document
+#    - :data: URL to the actual data resource
+# 4. Use this file when configuring the MPC App
+
+:sources a :MPCSourceSpec;
+  :source :src1, :src2.
+
+:src1 a :MPCSource;
+  :pref <https://pod.example.com/alice/preferences.ttl>;
+  :data <https://pod.example.com/alice/data.csv>.
+
+:src2 a :MPCSource;
+  :pref <https://pod.example.com/bob/preferences.ttl>;
+  :data <https://pod.example.com/bob/data.csv>.
+
+
+

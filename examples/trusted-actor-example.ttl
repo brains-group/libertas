@@ -1,0 +1,24 @@
+@prefix : <urn:solid:mpc#>.
+
+# Example Trusted Actor List for App Verification
+# This document is used when Encryption Agent Service is deployed adjacent to Solid Pod
+#
+# Instructions:
+# 1. This should be referenced in the Description Resource of your data resource
+# 2. Add WebIDs of trusted MPC Apps/Users to the :trusted_actor list
+# 3. The Encryption Agent will verify that the requesting App's WebID is in this list
+
+# Description Resource example (add to your data resource's .meta file):
+# <https://uri/to/data>
+#   :trusted_actor_list
+#     <https://uri/to/trusted-actor-resource>.
+
+# Trusted Actor Resource (this file):
+<>
+  :trusted_actor
+    <https://web.id/app1#me>,
+    <https://web.id/app2#me>,
+    <https://web.id/user1#me>.
+
+
+
