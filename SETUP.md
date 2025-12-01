@@ -4,10 +4,12 @@ Complete guide to set up and run the Libertas privacy-preserving computation fra
 
 ## Prerequisites
 
-- Git
+- Git (with submodule support)
 - Python 3.8+
-- Node.js 14+
+- Node.js 18+ (required for Community Solid Server)
 - Homebrew (macOS) or equivalent package manager
+
+**Note**: See [SUBMODULES.md](./SUBMODULES.md) for detailed information about git submodules setup.
 
 ## Quick Start
 
@@ -30,7 +32,28 @@ open http://localhost:5173
 
 ### Step 1: Initial Setup
 
-Run the main setup script to clone repositories and create configuration files:
+#### Option A: Using Git Submodules (Recommended)
+
+If this repository uses git submodules, initialize them:
+
+```bash
+# Clone the main repository with submodules
+git clone --recursive https://github.com/OxfordHCC/libertas.git
+cd libertas
+
+# Or if already cloned, initialize submodules
+git submodule update --init --recursive
+```
+
+This will clone:
+- `solid-mpc-app` (MPC App) → `libertas-setup/solid-mpc-app`
+- `solid-mpc` (Agent Services) → `libertas-setup/solid-mpc`
+- `MP-SPDZ` (MPC Framework) → `libertas-setup/MP-SPDZ`
+- `community-solid-server` (Local Solid Server) → `libertas-setup/community-solid-server`
+
+#### Option B: Using Setup Script
+
+Run the main setup script to clone repositories:
 
 ```bash
 chmod +x setup.sh
@@ -40,8 +63,9 @@ chmod +x setup.sh
 This will:
 - Clone `solid-mpc-app` (MPC App)
 - Clone `solid-mpc` (Agent Services)
-- Clone `MP-SPDZ` (MPC Framework)
 - Create example configuration files
+
+**Note**: MP-SPDZ and Community Solid Server are cloned separately by their respective setup scripts.
 
 ### Step 2: Install Dependencies
 

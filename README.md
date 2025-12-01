@@ -21,21 +21,85 @@ Please refer to the README in each repository for further details.
 ## Quick Setup
 
 ```bash
-# 1. Clone and setup
+# 1. Clone repository (with submodules)
+git clone --recursive https://github.com/OxfordHCC/libertas.git
+cd libertas
+
+# Or if already cloned, initialize submodules
+git submodule update --init --recursive
+
+# 2. Run setup
 ./setup.sh
 ./scripts/setup-services.sh
 
-# 2. Configure credentials
+# 3. Configure credentials
 ./scripts/configure-credentials.sh
 
-# 3. Start services
+# 4. Start services
 ./scripts/start-services.sh
 
-# 4. Access MPC App at http://localhost:5173
+# 5. Access MPC App at http://localhost:5173
 ```
 
-See [SETUP.md](./SETUP.md) for complete setup and run instructions.
+See [SETUP.md](./SETUP.md) for complete setup instructions.  
+See [SUBMODULES.md](./SUBMODULES.md) for information about git submodules.
 
+## Local Solid Community Server Setup
+
+For local development and testing, you can set up a local Solid Community Server. This allows you to test Libertas without external dependencies.
+
+### Quick Setup
+
+```bash
+# 1. Set up local Solid server
+./scripts/setup-local-solid.sh
+
+# 2. Start the Solid server
+./scripts/start-solid-server.sh
+
+# 3. Configure Libertas to use local IDP
+./scripts/configure-local-idp.sh encryption-agent@localhost
+```
+
+The server will start on **http://localhost:3000**
+
+### Authentication Endpoints
+
+The Community Solid Server provides the following authentication endpoints:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| **Registration**<br>`http://localhost:3000/.account/login/password/register/` | POST | Create a new account |
+| **Login**<br>`http://localhost:3000/.account/login/password/` | POST | Password-based login |
+| **Forgot Password**<br>`http://localhost:3000/.account/login/password/forgot/` | POST | Request password reset |
+| **Reset Password**<br>`http://localhost:3000/.account/login/password/reset/` | POST | Reset password with token |
+| **Account Info**<br>`http://localhost:3000/.account/` | GET | Get account controls and available endpoints (returns JSON) |
+| **List Login Methods**<br>`http://localhost:3000/.account/login/` | GET | Get available authentication methods |
+
+### Registering Accounts
+
+1. **Open browser**: http://localhost:3000
+2. **Click "Register"** or go directly to: http://localhost:3000/.account/login/password/register/
+3. **Create accounts** using email addresses:
+   - **Encryption Agent**: `encryption-agent@localhost`
+   - **Data Provider**: `data-provider@localhost`
+   - **Computation Requestor**: `requestor@localhost`
+4. **Note your WebIDs** (check your profile after registration):
+   - Format: `http://localhost:3000/[identifier]/profile/card#me`
+   - The identifier is derived from your email address
+
+### Important Notes
+
+- **Email-based registration**: Community Solid Server uses email addresses instead of usernames
+- **WebID linking**: After registration, you need to link a WebID to your account (see account settings)
+- **No trusted apps**: Community Solid Server doesn't have "Authorized Applications" - password authentication works directly for local development
+- **Permissions**: You still need to grant read permissions on data resources using WebIDs
+
+For more detailed information, see:
+- [LOCAL_SOLID_SETUP.md](./LOCAL_SOLID_SETUP.md) - Local Solid server setup
+- [SOLID_LOGIN_ENDPOINTS.md](./SOLID_LOGIN_ENDPOINTS.md) - Authentication endpoints
+- [UPLOAD_FILES_GUIDE.md](./UPLOAD_FILES_GUIDE.md) - File upload instructions
+- [SUBMODULES.md](./SUBMODULES.md) - Git submodules guide
 
 ## Citing this work
 

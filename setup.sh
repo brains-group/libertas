@@ -44,23 +44,33 @@ echo ""
 mkdir -p "$LIBERTAS_DIR"
 cd "$LIBERTAS_DIR"
 
-# Clone repositories
+# Clone repositories (as submodules if .gitmodules exists, otherwise as regular clones)
 echo -e "${YELLOW}Cloning repositories...${NC}"
 
-if [ ! -d "solid-mpc-app" ]; then
-    echo "Cloning MPC App repository..."
-    git clone "$MPC_APP_REPO" solid-mpc-app
-    echo -e "${GREEN}✓ MPC App repository cloned${NC}"
+# Check if we're in a git repo and have submodules configured
+if [ -f "$SETUP_DIR/.gitmodules" ]; then
+    echo "Initializing and updating git submodules..."
+    cd "$SETUP_DIR"
+    git submodule update --init --recursive
+    echo -e "${GREEN}✓ Git submodules initialized${NC}"
+    cd "$LIBERTAS_DIR"
 else
-    echo -e "${YELLOW}MPC App repository already exists, skipping...${NC}"
-fi
+    # Clone as regular repositories
+    if [ ! -d "solid-mpc-app" ]; then
+        echo "Cloning MPC App repository..."
+        git clone "$MPC_APP_REPO" solid-mpc-app
+        echo -e "${GREEN}✓ MPC App repository cloned${NC}"
+    else
+        echo -e "${YELLOW}MPC App repository already exists, skipping...${NC}"
+    fi
 
-if [ ! -d "solid-mpc" ]; then
-    echo "Cloning Agent Services repository..."
-    git clone "$AGENT_SERVICES_REPO" solid-mpc
-    echo -e "${GREEN}✓ Agent Services repository cloned${NC}"
-else
-    echo -e "${YELLOW}Agent Services repository already exists, skipping...${NC}"
+    if [ ! -d "solid-mpc" ]; then
+        echo "Cloning Agent Services repository..."
+        git clone "$AGENT_SERVICES_REPO" solid-mpc
+        echo -e "${GREEN}✓ Agent Services repository cloned${NC}"
+    else
+        echo -e "${YELLOW}Agent Services repository already exists, skipping...${NC}"
+    fi
 fi
 
 echo ""

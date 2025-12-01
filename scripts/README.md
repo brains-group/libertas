@@ -73,14 +73,27 @@ Comprehensive setup verification.
 
 | Script | Purpose |
 |--------|---------|
+| **Setup Scripts** | |
 | `setup-services.sh` | Install dependencies and setup |
+| `setup-local-solid.sh` | Set up local Solid IDP and Pod server |
+| **Configuration Scripts** | |
 | `configure-credentials.sh` | Configure encryption agent credentials |
+| `configure-local-idp.sh` | Configure Libertas to use local IDP |
+| `generate-preference.sh` | Generate preference document template |
+| `generate-resource-desc.sh` | Generate resource description template |
+| **Service Management** | |
 | `start-services.sh` | Start services |
 | `stop-services.sh` | Stop services |
 | `check-services.sh` | Check service status |
+| `start-solid-server.sh` | Start local Solid server |
+| **Testing & Demo** | |
+| `run-end-to-end-demo.sh` | Run complete end-to-end demo |
+| `create-test-data.sh` | Create test data files |
+| `upload-files-to-pod.sh` | Upload files to Solid Pod |
 | `verify-setup.sh` | Verify complete setup |
-| `generate-preference.sh` | Generate preference document template |
-| `generate-resource-desc.sh` | Generate resource description template |
+| **Helper Scripts** | |
+| `link-webid-guide.sh` | Guide for linking WebID |
+| `setup-client-credentials.sh` | Guide for setting up client credentials |
 
 ## Quick Reference
 
@@ -89,6 +102,11 @@ Comprehensive setup verification.
 ./setup.sh
 ./scripts/setup-services.sh
 ./scripts/configure-credentials.sh
+
+# Local Solid server setup (optional)
+./scripts/setup-local-solid.sh
+./scripts/start-solid-server.sh
+./scripts/configure-local-idp.sh test-user
 
 # Run services
 ./scripts/start-services.sh
